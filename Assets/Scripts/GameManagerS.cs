@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManagerS : MonoBehaviour
 {
+    public RingS inHand;
+
     public GameObject towerPrefab;
     public GameObject ringPrefab;
     public RingS[] ringArr;
@@ -17,8 +19,8 @@ public class GameManagerS : MonoBehaviour
         createTowers();
         createRings();
         towerArr[0].pushRing(ringArr[0]);
-        towerArr[1].pushRing(ringArr[1]);
-        towerArr[2].pushRing(ringArr[2]);
+        //towerArr[1].pushRing(ringArr[1]);
+        //towerArr[2].pushRing(ringArr[2]);
 
     }
 
@@ -39,7 +41,7 @@ public class GameManagerS : MonoBehaviour
     {
         double scaleRat = (0.5 / numRings);
         
-        for(int i = 0; i < numRings; i++)
+        for(int i = 0; i < 1; i++)
         {
 
             Vector3 ratio = new Vector3((float)(300-(300*scaleRat*i)), 75f, 1f);
