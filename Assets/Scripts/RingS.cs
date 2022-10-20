@@ -6,7 +6,6 @@ public class RingS : MonoBehaviour
 {
     public bool clipped;
     public GameManagerS theManager;
-    public Vector3 mousePos;
     public int size;
     // Start is called before the first frame update
     void Start()

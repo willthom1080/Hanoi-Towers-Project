@@ -44,7 +44,7 @@ public class GameManagerS : MonoBehaviour
         for(int i = 0; i < 1; i++)
         {
 
-            Vector3 ratio = new Vector3((float)(300-(300*scaleRat*i)), 75f, 1f);
+            Vector3 ratio = new Vector3((float)(2-(scaleRat*i)), .75f, 1f);
             ringArr[i] = GameObject.Instantiate(ringPrefab,new Vector3(0,0,0),Quaternion.identity).GetComponent<RingS>();
             ringArr[i].transform.localScale = (ratio);
         }
