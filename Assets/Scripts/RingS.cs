@@ -7,6 +7,7 @@ public class RingS : MonoBehaviour
     public bool clipped;
     public GameManagerS theManager;
     public Vector3 mousePos;
+    public int size;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +20,7 @@ public class RingS : MonoBehaviour
     {
         if (clipped)
         {
-            mousePos = Input.mousePosition;
-            transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, 10));
         }
         
     }
@@ -32,6 +32,7 @@ public class RingS : MonoBehaviour
             clipped = true;
             theManager.inHand = this;
             transform.parent = null;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

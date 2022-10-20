@@ -50,6 +50,10 @@ public class GameManagerS : MonoBehaviour
         }
     }
 
+    void unHand()
+    {
+        inHand = null;
+    }
     // Update is called once per frame
     void Update()
     {

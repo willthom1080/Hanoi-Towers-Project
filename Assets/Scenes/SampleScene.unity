@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4080f80227c7f47b39aad93a72d8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inHand: {fileID: 0}
   towerPrefab: {fileID: 7841840773084537521, guid: 22290b8ee1b6ff9489443f3a21e7233d, type: 3}
   ringPrefab: {fileID: 8143807873760852925, guid: 3bce45d005184224bb418b5217a67bc3, type: 3}
   ringArr: []
