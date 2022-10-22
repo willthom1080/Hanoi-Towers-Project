@@ -22,12 +22,14 @@ public class TowerS : MonoBehaviour
 
     public void pushRing(RingS theRing)
     {
-        currCount = 0;
         tRingArr[currCount] = theRing;
-        theRing.transform.SetParent(gameObject.transform);
         currCount++;
+        topValue = theRing.size;
+
+        theRing.transform.SetParent(gameObject.transform);
         theRing.clipped = false;
         theRing.GetComponent<BoxCollider2D>().enabled = true;
+        theRing.transform.localPosition = new Vector3(0f, ((currCount - 1)*0.150f - 0.425f), -1f);
     }
 
     public void OnMouseUpAsButton()
@@ -37,7 +39,14 @@ public class TowerS : MonoBehaviour
             pushRing(theManager.inHand);
             theManager.inHand = null;
         }
-        Debug.Log("Clicked" + gameObject.name);
+    }
+
+    public void removeTop()
+    {
+        tRingArr[currCount - 1] = null;
+        currCount--;
+        if (currCount == 0) {topValue = 100; }
+        else {topValue = tRingArr[currCount - 1].size; }
     }
 
     public void Start()

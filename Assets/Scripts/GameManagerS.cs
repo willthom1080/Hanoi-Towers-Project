@@ -14,13 +14,11 @@ public class GameManagerS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numRings = 6;
         ringArr = new RingS[numRings];
         towerArr = new TowerS[3];
         createTowers();
         createRings();
-        towerArr[0].pushRing(ringArr[0]);
-        //towerArr[1].pushRing(ringArr[1]);
-        //towerArr[2].pushRing(ringArr[2]);
 
     }
 
@@ -41,12 +39,15 @@ public class GameManagerS : MonoBehaviour
     {
         double scaleRat = (0.5 / numRings);
         
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < numRings; i++)
         {
 
             Vector3 ratio = new Vector3((float)(2-(scaleRat*i)), .75f, 1f);
-            ringArr[i] = GameObject.Instantiate(ringPrefab,new Vector3(0,0,0),Quaternion.identity).GetComponent<RingS>();
+            ringArr[i] = GameObject.Instantiate(ringPrefab,new Vector3(0,0,-1),Quaternion.identity).GetComponent<RingS>();
             ringArr[i].transform.localScale = (ratio);
+            ringArr[i].size = numRings - i;
+            ringArr[i].colorIn();
+            towerArr[0].pushRing(ringArr[i]);
         }
     }
 
