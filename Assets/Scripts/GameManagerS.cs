@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManagerS : MonoBehaviour
@@ -10,11 +11,15 @@ public class GameManagerS : MonoBehaviour
     public GameObject ringPrefab;
     public RingS[] ringArr;
     public TowerS[] towerArr;
+    public TMP_Text moveCountText;
     public int numRings;
+    public int moves;
     // Start is called before the first frame update
     void Start()
     {
-        numRings = 6;
+        moves = 0;
+        moveCountText = GameObject.FindGameObjectWithTag("Text").GetComponent<TMP_Text>();
+        numRings = 3;
         ringArr = new RingS[numRings];
         towerArr = new TowerS[3];
         createTowers();
@@ -51,10 +56,12 @@ public class GameManagerS : MonoBehaviour
         }
     }
 
-    void unHand()
+    public void moveTaken()
     {
-        inHand = null;
+        moves++;
+        moveCountText.text = "Moves: " + moves;
     }
+
     // Update is called once per frame
     void Update()
     {

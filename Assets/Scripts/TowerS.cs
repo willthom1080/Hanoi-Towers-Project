@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,6 +49,7 @@ public class TowerS : MonoBehaviour
         currCount--;
         if (currCount == 0) {topValue = 100; }
         else {topValue = tRingArr[currCount - 1].size; }
+        theManager.moveTaken();
     }
 
     public void Start()
