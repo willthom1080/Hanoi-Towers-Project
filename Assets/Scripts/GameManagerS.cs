@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerS : MonoBehaviour
@@ -27,6 +28,29 @@ public class GameManagerS : MonoBehaviour
 
     }
 
+    public void newRingCt()
+    {
+        removeClutter();
+        moves = -1;
+        moveTaken();
+        ringArr = new RingS[numRings];
+        towerArr = new TowerS[3];
+        createTowers();
+        createRings();
+    }
+
+    void removeClutter()
+    {
+        if(inHand != null)
+        {
+            inHand.selfDest();
+        }
+        foreach(TowerS theTower in towerArr)
+        {
+            theTower.selfDest();
+        }
+    }
+
     void createTowers()
     {
         towerArr[0] = GameObject.Instantiate(towerPrefab,new Vector3(-6,0,0), Quaternion.identity).GetComponent<TowerS>();
@@ -47,7 +71,7 @@ public class GameManagerS : MonoBehaviour
         for(int i = 0; i < numRings; i++)
         {
 
-            Vector3 ratio = new Vector3((float)(2-(scaleRat*i)), .75f, 1f);
+            Vector3 ratio = new Vector3((float)(1.25*(2-(scaleRat*i))), .75f, 1f);
             ringArr[i] = GameObject.Instantiate(ringPrefab,new Vector3(0,0,-1),Quaternion.identity).GetComponent<RingS>();
             ringArr[i].transform.localScale = (ratio);
             ringArr[i].size = numRings - i;

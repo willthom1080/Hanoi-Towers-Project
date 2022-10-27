@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,5 +56,17 @@ public class TowerS : MonoBehaviour
     public void Start()
     {
         theManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerS>();
+    }
+
+    public void selfDest()
+    {
+        foreach(RingS theRing in tRingArr)
+        {
+            if (theRing != null)
+            {
+                theRing.selfDest();
+            }
+        }
+        Destroy(gameObject);
     }
 }

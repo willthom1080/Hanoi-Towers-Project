@@ -20,7 +20,7 @@ public class RingS : MonoBehaviour
     {
         if (clipped)
         {
-            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, 10));
+            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, 9));
         }
         
     }
@@ -47,5 +47,10 @@ public class RingS : MonoBehaviour
         green *= (size+1)%2;
         blue *= size+1;
         this.GetComponent<SpriteRenderer>().color = new Color(red, green, blue);
+    }
+
+    public void selfDest()
+    {
+        Destroy(gameObject);
     }
 }
