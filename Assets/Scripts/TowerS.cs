@@ -44,13 +44,15 @@ public class TowerS : MonoBehaviour
         }
     }
 
-    public void removeTop()
+    public RingS removeTop()
     {
+        RingS theRef = tRingArr[currCount - 1];
         tRingArr[currCount - 1] = null;
         currCount--;
         if (currCount == 0) {topValue = 100; }
         else {topValue = tRingArr[currCount - 1].size; }
         theManager.moveTaken();
+        return theRef;
     }
 
     public void Start()

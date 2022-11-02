@@ -15,7 +15,7 @@ public class GameManagerS : MonoBehaviour
     public TMP_Text moveCountText;
     public int numRings;
     public int moves;
-    // Start is called before the first frame update
+    
     void Start()
     {
         moves = 0;
@@ -25,6 +25,7 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
+        solveIt(numRings, 1, 2, 3);
 
     }
 
@@ -86,7 +87,18 @@ public class GameManagerS : MonoBehaviour
         moveCountText.text = "Moves: " + moves;
     }
 
-    // Update is called once per frame
+    public void solveIt(int n, int from, int to, int other)
+    {
+        if(n == 0)
+        {
+            return;
+        }
+        solveIt(n - 1, from, other, to);
+        towerArr[to - 1].pushRing(towerArr[from - 1].removeTop());
+        
+        solveIt(n - 1, other, to, from);
+    }
+
     void Update()
     {
         
