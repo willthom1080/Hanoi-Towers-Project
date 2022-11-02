@@ -25,7 +25,6 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
-        solveIt(numRings, 1, 2, 3);
 
     }
 
@@ -38,6 +37,7 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
+        solveIt(numRings, 0, 2, 1);
     }
 
     void removeClutter()
@@ -94,10 +94,10 @@ public class GameManagerS : MonoBehaviour
             return;
         }
         solveIt(n - 1, from, other, to);
-        towerArr[to - 1].pushRing(towerArr[from - 1].removeTop());
-        
+        towerArr[to].pushRing(towerArr[from].removeTop());
         solveIt(n - 1, other, to, from);
     }
+
 
     void Update()
     {

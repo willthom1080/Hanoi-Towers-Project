@@ -21,6 +21,7 @@ public class TowerS : MonoBehaviour
         currCount = 0;
         tRingArr = new RingS[maxCount];
         topValue = 100;
+        getManager();
     }
 
     public void pushRing(RingS theRing)
@@ -51,13 +52,28 @@ public class TowerS : MonoBehaviour
         currCount--;
         if (currCount == 0) {topValue = 100; }
         else {topValue = tRingArr[currCount - 1].size; }
-        theManager.moveTaken();
+        if (theManager != null)
+        {
+            theManager.moveTaken();
+        }
+        else
+        {
+            Debug.Log("No Manager" + gameObject.name);
+        }
         return theRef;
     }
 
     public void Start()
     {
-        theManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerS>();
+        getManager();
+    }
+
+    public void getManager()
+    {
+        if (theManager == null)
+        {
+            theManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerS>();
+        }
     }
 
     public void selfDest()
