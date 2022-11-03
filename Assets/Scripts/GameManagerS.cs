@@ -88,7 +88,10 @@ public class GameManagerS : MonoBehaviour
 
     public void solveItStarter()
     {
-        StartCoroutine(solveIt(numRings));
+        if (moves == 0)
+        {
+            StartCoroutine(solveIt(numRings));
+        }
     }
     public IEnumerator solveIt(int n, int from = 0, int to = 2, int other = 1)
     {
@@ -96,22 +99,24 @@ public class GameManagerS : MonoBehaviour
         {
             yield break;
         }
-        Debug.Log("Mlr");
-        solveIt(n - 1, from, other, to);
+       
+        yield return StartCoroutine(solveIt(n - 1, from, other, to));
 
-        yield return StartCoroutine(waitCoroutine(from, to));
-        
-        solveIt(n - 1, other, to, from);
+        yield return StartCoroutine(stepCoroutine(from, to));
+
+        yield return StartCoroutine(solveIt(n - 1, other, to, from));
     }
 
-    IEnumerator waitCoroutine(int from2, int to2)
+    IEnumerator stepCoroutine(int from2, int to2)
     {
-        Debug.Log("Mart");
         yield return new WaitForSeconds(1.0f);
         towerArr[to2].pushRing(towerArr[from2].removeTop());
     }
 
-
+    public void vicRoy()
+    {
+        Debug.Log("You Win!");
+    }
     void Update()
     {
         
