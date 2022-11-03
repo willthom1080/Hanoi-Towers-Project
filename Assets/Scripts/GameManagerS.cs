@@ -37,7 +37,6 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
-        solveIt(numRings, 0, 2, 1);
     }
 
     void removeClutter()
@@ -87,15 +86,29 @@ public class GameManagerS : MonoBehaviour
         moveCountText.text = "Moves: " + moves;
     }
 
-    public void solveIt(int n, int from, int to, int other)
+    public void solveItStarter()
+    {
+        StartCoroutine(solveIt(numRings));
+    }
+    public IEnumerator solveIt(int n, int from = 0, int to = 2, int other = 1)
     {
         if(n == 0)
         {
-            return;
+            yield break;
         }
+        Debug.Log("Mlr");
         solveIt(n - 1, from, other, to);
-        towerArr[to].pushRing(towerArr[from].removeTop());
+
+        yield return StartCoroutine(waitCoroutine(from, to));
+        
         solveIt(n - 1, other, to, from);
+    }
+
+    IEnumerator waitCoroutine(int from2, int to2)
+    {
+        Debug.Log("Mart");
+        yield return new WaitForSeconds(1.0f);
+        towerArr[to2].pushRing(towerArr[from2].removeTop());
     }
 
 
