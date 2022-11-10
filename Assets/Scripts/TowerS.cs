@@ -34,6 +34,8 @@ public class TowerS : MonoBehaviour
         theRing.clipped = false;
         theRing.GetComponent<BoxCollider2D>().enabled = true;
         theRing.transform.localPosition = new Vector3(0f, ((currCount - 1)*0.150f - 0.425f), -1f);
+
+        if(towerVal == 3) { checkVic(); }
     }
 
     public void OnMouseUpAsButton()
@@ -66,6 +68,14 @@ public class TowerS : MonoBehaviour
     public void Start()
     {
         getManager();
+    }
+
+    public void checkVic()
+    {
+        if(currCount == theManager.numRings)
+        {
+            Debug.Log("VicRoy");
+        }
     }
 
     public void getManager()

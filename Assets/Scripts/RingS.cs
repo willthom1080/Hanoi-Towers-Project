@@ -20,7 +20,7 @@ public class RingS : MonoBehaviour
     {
         if (clipped)
         {
-            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, 9));
+            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, 8));
         }
         
     }
@@ -40,12 +40,19 @@ public class RingS : MonoBehaviour
 
     public void colorIn()
     {
-        float red = .10f;
-        float green = .10f;
-        float blue = .10f;
-        red *= size+1;
-        green *= (size+1)%2;
-        blue *= size+1;
+        float red = 0f;
+        float green = 0f;
+        float blue = 0f;
+        switch (size)
+        {
+            case 1: red = 255f; break;
+            case 2: red = 255f; green = 255f; break;
+            case 3: green = 255f; break;
+            case 4: green = 255f; blue = 255; break;
+            case 5: blue = 255f; break;
+            case 6: red = 255f; blue = 255f; break;
+            case 7: red = 255f; green = 127f; blue = 127f; break;
+        }
         this.GetComponent<SpriteRenderer>().color = new Color(red, green, blue);
     }
 
