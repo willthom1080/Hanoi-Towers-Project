@@ -13,8 +13,12 @@ public class GameManagerS : MonoBehaviour
     public RingS[] ringArr;
     public TowerS[] towerArr;
     public TMP_Text moveCountText;
+    public TMP_Text victoryText;
+    public GameObject victoryOblong;
     public int numRings;
     public int moves;
+
+    private bool solving;
     
     void Start()
     {
@@ -25,7 +29,7 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
-
+        solving = false;
     }
 
     public void newRingCt()
@@ -49,24 +53,26 @@ public class GameManagerS : MonoBehaviour
         {
             theTower.selfDest();
         }
+        victoryOblong.GetComponent<SpriteRenderer>().enabled = false;
+        victoryText.enabled = false;
     }
 
     void createTowers()
     {
-        towerArr[0] = GameObject.Instantiate(towerPrefab,new Vector3(-6,0,0), Quaternion.identity).GetComponent<TowerS>();
+        towerArr[0] = GameObject.Instantiate(towerPrefab, Camera.main.ScreenToWorldPoint(new Vector3((Camera.main.pixelWidth / 3), (Camera.main.pixelHeight / 2),10)), Quaternion.identity).GetComponent<TowerS>();
         towerArr[0].towerVal = 1;
         towerArr[0].createTow(numRings);
-        towerArr[1] = GameObject.Instantiate(towerPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TowerS>();
+        towerArr[1] = GameObject.Instantiate(towerPrefab, Camera.main.ScreenToWorldPoint(new Vector3((Camera.main.pixelWidth / 2), (Camera.main.pixelHeight / 2), 10)), Quaternion.identity).GetComponent<TowerS>();
         towerArr[1].towerVal = 2;
         towerArr[1].createTow(numRings);
-        towerArr[2] = GameObject.Instantiate(towerPrefab, new Vector3(6, 0, 0), Quaternion.identity).GetComponent<TowerS>();
+        towerArr[2] = GameObject.Instantiate(towerPrefab, Camera.main.ScreenToWorldPoint(new Vector3((Camera.main.pixelWidth / 3)*2, (Camera.main.pixelHeight / 2), 10)), Quaternion.identity).GetComponent<TowerS>();
         towerArr[2].towerVal = 3;
         towerArr[2].createTow(numRings);
     }
 
     void createRings() 
     {
-        double scaleRat = (0.5 / numRings);
+        double scaleRat = (1.0 / numRings);
         
         for(int i = 0; i < numRings; i++)
         {
@@ -88,9 +94,14 @@ public class GameManagerS : MonoBehaviour
 
     public void solveItStarter()
     {
-        if (moves == 0)
+        if (!(solving))
         {
-            StartCoroutine(solveIt(numRings));
+            solving = true;
+            newRingCt();
+            if (moves == 0)
+            {
+                StartCoroutine(solveIt(numRings));
+            }
         }
     }
     public IEnumerator solveIt(int n, int from = 0, int to = 2, int other = 1)
@@ -115,7 +126,10 @@ public class GameManagerS : MonoBehaviour
 
     public void vicRoy()
     {
+        victoryOblong.GetComponent<SpriteRenderer>().enabled = true;
+        victoryText.enabled = true;
         Debug.Log("You Win!");
+        solving = false;
     }
     void Update()
     {

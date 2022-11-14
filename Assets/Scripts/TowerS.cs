@@ -74,7 +74,7 @@ public class TowerS : MonoBehaviour
     {
         if(currCount == theManager.numRings)
         {
-            Debug.Log("VicRoy");
+            theManager.vicRoy();
         }
     }
 
