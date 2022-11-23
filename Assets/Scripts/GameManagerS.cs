@@ -34,6 +34,7 @@ public class GameManagerS : MonoBehaviour
 
     public void newRingCt()
     {
+        StopAllCoroutines();
         removeClutter();
         moves = -1;
         moveTaken();
@@ -41,6 +42,7 @@ public class GameManagerS : MonoBehaviour
         towerArr = new TowerS[3];
         createTowers();
         createRings();
+        solving = false;
     }
 
     void removeClutter()
@@ -128,7 +130,6 @@ public class GameManagerS : MonoBehaviour
     {
         victoryOblong.GetComponent<SpriteRenderer>().enabled = true;
         victoryText.enabled = true;
-        Debug.Log("You Win!");
         solving = false;
     }
     void Update()

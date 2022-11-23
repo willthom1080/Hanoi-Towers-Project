@@ -30,6 +30,11 @@ public class TowerS : MonoBehaviour
         currCount++;
         topValue = theRing.size;
 
+        if(theRing.prevTow != towerVal)
+        {
+            theManager.moveTaken();
+            theRing.prevTow = towerVal;
+        }
         theRing.transform.SetParent(gameObject.transform);
         theRing.clipped = false;
         theRing.GetComponent<BoxCollider2D>().enabled = true;
@@ -54,14 +59,6 @@ public class TowerS : MonoBehaviour
         currCount--;
         if (currCount == 0) {topValue = 100; }
         else {topValue = tRingArr[currCount - 1].size; }
-        if (theManager != null)
-        {
-            theManager.moveTaken();
-        }
-        else
-        {
-            Debug.Log("No Manager" + gameObject.name);
-        }
         return theRef;
     }
 

@@ -8,12 +8,13 @@ public class RingS : MonoBehaviour
     public GameManagerS theManager;
     public TowerS parTow;
     public int size;
+    public int prevTow;
 
     void Start()
     {
         clipped = false;
         theManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerS>();
-        
+        prevTow = 1;
     }
 
     void Update()

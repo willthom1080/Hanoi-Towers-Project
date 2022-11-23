@@ -128,3 +128,4 @@ MonoBehaviour:
   theManager: {fileID: 0}
   parTow: {fileID: 0}
   size: 0
+  prevTow: 1
