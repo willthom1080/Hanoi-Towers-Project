@@ -36,6 +36,7 @@ public class RingS : MonoBehaviour
             theManager.inHand = this;
             transform.parent = null;
             GetComponent<BoxCollider2D>().enabled = false;
+            theManager.StopAllCoroutines();
         }
     }
 
